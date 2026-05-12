@@ -10,8 +10,6 @@ from models import Patient, Appointment, ReminderQueue, PatientHistory
 def clean_message_text(text: str) -> str:
     """Removes <think> blocks, markdown asterisks, and brackets from AI output."""
     text = re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL)
-    text = text.replace('**', '').replace('*', '')
-    text = re.sub(r'\[.*?\]', '', text)
     return text.strip()
 
 

@@ -61,12 +61,12 @@ export default function ReviewQueue({ addToast }) {
 
   const runAgent = async () => {
     setRunning(true)
-    addToast('🤖 Agent is processing appointments…', 'info')
+    addToast('Agent is processing appointments…', 'info')
     try {
       const res = await fetch('/api/run-agent', { method: 'POST' })
       const data = await res.json()
       if (data.detail) { addToast(data.detail, 'error') }
-      else { addToast(`✅ Agent processed ${data.processed} appointment(s)`, 'success'); fetchQueue() }
+      else { addToast(`Agent processed ${data.processed} appointment(s)`, 'success'); fetchQueue() }
     } catch { addToast('Agent failed', 'error') }
     setRunning(false)
   }
@@ -75,7 +75,7 @@ export default function ReviewQueue({ addToast }) {
     try {
       await fetch(`/api/queue/${id}/approve`, { method: 'PATCH' })
       setQueue(q => q.map(r => r.id === id ? { ...r, status: 'APPROVED' } : r))
-      addToast('✅ Reminder approved', 'success')
+      addToast('Reminder approved', 'success')
     } catch { addToast('Failed to approve', 'error') }
   }
 
@@ -87,7 +87,7 @@ export default function ReviewQueue({ addToast }) {
         body: JSON.stringify({ edited_message: editedMessage })
       })
       setQueue(q => q.map(r => r.id === id ? { ...r, edited_message: editedMessage } : r))
-      addToast('✏️ Message saved', 'success')
+      addToast('Message saved', 'success')
     } catch { addToast('Failed to save edit', 'error') }
   }
 
@@ -96,7 +96,7 @@ export default function ReviewQueue({ addToast }) {
       const res = await fetch(`/api/queue/${id}/dispatch`, { method: 'POST' })
       const data = await res.json()
       setQueue(q => q.map(r => r.id === id ? { ...r, status: 'DISPATCHED', dispatched_at: data.dispatched_at } : r))
-      addToast('🚀 Reminder dispatched!', 'success')
+      addToast('Reminder dispatched!', 'success')
     } catch { addToast('Failed to dispatch', 'error') }
   }
 
@@ -107,7 +107,7 @@ export default function ReviewQueue({ addToast }) {
       const res = await fetch(`/api/appointments/${appointmentId}`, { method: 'DELETE' })
       if (res.ok) {
         setQueue(q => q.filter(r => r.appointment_id !== appointmentId))
-        addToast('🗑️ Appointment deleted', 'success')
+        addToast('Appointment deleted', 'success')
       } else {
         const errorData = await res.json().catch(() => ({}));
         addToast(`Failed: ${errorData.detail || res.statusText || 'Unknown error'}`, 'error')
@@ -130,7 +130,7 @@ export default function ReviewQueue({ addToast }) {
         })
       })
       if (!res.ok) throw new Error()
-      addToast('✅ Appointment created!', 'success')
+      addToast('Appointment created!', 'success')
       setShowForm(false)
       setForm({ 
         patient_name: '', patient_age: '', patient_phone: '', patient_email: '', 
@@ -196,7 +196,7 @@ export default function ReviewQueue({ addToast }) {
         <div className="empty-state"><div className="spin" style={{fontSize:32}}>⟳</div><div className="empty-title" style={{marginTop:16}}>Loading queue…</div></div>
       ) : filtered.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-icon">📭</div>
+          <div className="empty-icon"></div>
           <div className="empty-title">{queue.length === 0 ? 'No reminders yet' : `No ${filter} reminders`}</div>
           <div className="empty-subtitle">{queue.length === 0 ? 'Click "Run Agent" to generate AI reminders for all appointments.' : 'Try a different filter.'}</div>
         </div>

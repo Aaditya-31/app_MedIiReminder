@@ -1,4 +1,4 @@
-# SKORE — Appointment Reminder Agent Startup Script (Windows PowerShell)
+# MediReminder — Appointment Reminder Agent Startup Script (Windows PowerShell)
 
 Write-Host ""
 Write-Host "  ███████╗██╗  ██╗ ██████╗ ██████╗ ███████╗" -ForegroundColor Cyan

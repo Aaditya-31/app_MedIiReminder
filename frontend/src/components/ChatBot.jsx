@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 export default function ChatBot() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hi! I\'m your SKORE AI assistant. Ask me about appointments, patients, or reminder queue status.' }
+    { role: 'assistant', content: 'Hi! I\'m your MediReminder AI Assistant. Ask me about appointments, patients, or reminder queue status.' }
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -50,14 +51,14 @@ export default function ChatBot() {
       {open && (
         <div className="chat-panel" id="chat-panel">
           <div className="chat-header">
-            <div className="chat-title">🤖 SKORE AI Assistant</div>
+            <div className="chat-title">🤖 MediReminder AI Assistant</div>
             <button className="chat-close" onClick={() => setOpen(false)}>✕</button>
           </div>
 
           <div className="chat-messages" id="chat-messages">
             {messages.map((m, i) => (
               <div key={i} className={`chat-bubble ${m.role === 'user' ? 'bubble-user' : 'bubble-assistant'}`}>
-                {m.content}
+                <ReactMarkdown>{m.content}</ReactMarkdown>
               </div>
             ))}
             {loading && (

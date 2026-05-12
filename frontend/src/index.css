@@ -431,6 +431,10 @@ body {
   color: var(--text-dim);
 }
 .bubble-typing { color: var(--text-muted); font-style: italic; }
+.chat-bubble p { margin-bottom: 8px; }
+.chat-bubble p:last-child { margin-bottom: 0; }
+.chat-bubble ul, .chat-bubble ol { margin-left: 20px; margin-bottom: 8px; }
+.chat-bubble ul:last-child, .chat-bubble ol:last-child { margin-bottom: 0; }
 
 .chat-input-row {
   padding: 12px 16px;

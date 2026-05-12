@@ -1,7 +1,7 @@
 export default function Sidebar({ page, setPage }) {
   const nav = [
-    { id: 'queue', icon: '📋', label: 'Review Queue' },
-    { id: 'appointments', icon: '🗓️', label: 'Appointments' },
+    { id: 'queue', icon: '', label: 'Review Queue' },
+    { id: 'appointments', icon: '', label: 'Appointments' },
   ]
 
   return (

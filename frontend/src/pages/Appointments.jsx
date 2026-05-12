@@ -115,7 +115,7 @@ export default function Appointments({ addToast }) {
                       style={{ color: '#ef4444', padding: '4px 8px' }}
                       title="Delete Appointment"
                     >
-                      🗑️
+                      Delete
                     </button>
                   </td>
                 </tr>

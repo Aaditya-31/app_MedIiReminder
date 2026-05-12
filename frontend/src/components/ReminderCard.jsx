@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const CHANNEL_ICONS = { SMS: '💬', EMAIL: '✉️', PHONE_CALL: '📞' }
+const CHANNEL_ICONS = { SMS: '', EMAIL: '', PHONE_CALL: '' }
 const CHANNEL_CLASS = { SMS: 'badge-sms', EMAIL: 'badge-email', PHONE_CALL: 'badge-phone' }
 const CARD_CLASS = { SMS: 'card-sms', EMAIL: 'card-email', PHONE_CALL: 'card-phone' }
 
@@ -13,10 +13,10 @@ function formatDate(iso) {
 
 function StatusChip({ status }) {
   const cls = { PENDING: 'chip-pending', APPROVED: 'chip-approved', DISPATCHED: 'chip-dispatched' }
-  const icons = { PENDING: '⏳', APPROVED: '✅', DISPATCHED: '🚀' }
+  const icons = { PENDING: '', APPROVED: '', DISPATCHED: '' }
   return (
     <span className={`status-chip ${cls[status] || 'chip-pending'}`}>
-      {icons[status]} {status}
+      {status}
     </span>
   )
 }
@@ -49,14 +49,14 @@ export default function ReminderCard({ reminder, onApprove, onEdit, onDispatch, 
           <div className="card-patient">
             <div className="patient-name">{reminder.patient?.name}</div>
             <div className="patient-meta">
-              <span className="meta-item">🎂 Age {reminder.patient?.age}</span>
-              <span className="meta-item">📞 {reminder.patient?.phone}</span>
-              <span className="meta-item">✉️ {reminder.patient?.email}</span>
+              <span className="meta-item">Age {reminder.patient?.age}</span>
+              <span className="meta-item">{reminder.patient?.phone}</span>
+              <span className="meta-item">{reminder.patient?.email}</span>
             </div>
           </div>
           <div className="card-badges">
             <span className={`channel-badge ${CHANNEL_CLASS[reminder.channel]}`}>
-              {CHANNEL_ICONS[reminder.channel]} {reminder.channel?.replace('_', ' ')}
+              {reminder.channel?.replace('_', ' ')}
             </span>
             <StatusChip status={reminder.status} />
             {!isDispatched && (
@@ -66,7 +66,7 @@ export default function ReminderCard({ reminder, onApprove, onEdit, onDispatch, 
                 style={{ color: '#ef4444', marginLeft: 8, padding: '4px' }}
                 title="Delete Appointment"
               >
-                🗑️
+                Delete
               </button>
             )}
           </div>
@@ -95,7 +95,7 @@ export default function ReminderCard({ reminder, onApprove, onEdit, onDispatch, 
         {/* AI Reasoning */}
         <div className="reasoning-section">
           <div className="reasoning-title">
-            🤖 AI REASONING
+            AI REASONING
           </div>
           <div className="reasoning-list">
             {(reminder.reasoning || [])
@@ -112,7 +112,7 @@ export default function ReminderCard({ reminder, onApprove, onEdit, onDispatch, 
         {/* Message */}
         <div className="message-section">
           <div className="message-label">
-            {reminder.edited_message ? '✏️ EDITED MESSAGE' : '💡 AI DRAFTED MESSAGE'}
+            {reminder.edited_message ? 'EDITED MESSAGE' : 'AI DRAFTED MESSAGE'}
           </div>
           {editing ? (
             <textarea
@@ -131,7 +131,7 @@ export default function ReminderCard({ reminder, onApprove, onEdit, onDispatch, 
           <div className="card-actions">
             {editing ? (
               <>
-                <button className="btn btn-primary btn-sm" onClick={handleEditSave}>💾 Save</button>
+                <button className="btn btn-primary btn-sm" onClick={handleEditSave}>Save</button>
                 <button className="btn btn-ghost btn-sm" onClick={() => setEditing(false)}>Cancel</button>
               </>
             ) : (
@@ -140,19 +140,19 @@ export default function ReminderCard({ reminder, onApprove, onEdit, onDispatch, 
                   className="btn btn-ghost btn-sm"
                   id={`edit-btn-${reminder.id}`}
                   onClick={handleEditStart}
-                >✏️ Edit</button>
+                >Edit</button>
                 {!isApproved && (
                   <button
                     className="btn btn-success btn-sm"
                     id={`approve-btn-${reminder.id}`}
                     onClick={() => onApprove(reminder.id)}
-                  >✅ Approve</button>
+                  >Approve</button>
                 )}
                 <button
                   className="btn btn-primary btn-sm"
                   id={`dispatch-btn-${reminder.id}`}
                   onClick={() => setShowDispatch(true)}
-                >🚀 Dispatch</button>
+                >Dispatch</button>
               </>
             )}
           </div>
@@ -160,7 +160,7 @@ export default function ReminderCard({ reminder, onApprove, onEdit, onDispatch, 
 
         {isDispatched && reminder.dispatched_at && (
           <div className="meta-item" style={{ marginTop: 8 }}>
-            🚀 Dispatched at {formatDate(reminder.dispatched_at)}
+            Dispatched at {formatDate(reminder.dispatched_at)}
           </div>
         )}
       </div>
@@ -169,7 +169,7 @@ export default function ReminderCard({ reminder, onApprove, onEdit, onDispatch, 
       {showDispatch && (
         <div className="modal-overlay" onClick={() => setShowDispatch(false)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
-            <div className="modal-title">🚀 Confirm Dispatch</div>
+            <div className="modal-title">Confirm Dispatch</div>
             <div className="modal-subtitle">
               You are about to mark this reminder as <strong>DISPATCHED</strong>.<br/>
               Nothing will actually be sent — this only updates the database record.
@@ -185,7 +185,7 @@ export default function ReminderCard({ reminder, onApprove, onEdit, onDispatch, 
                 className="btn btn-primary"
                 id={`confirm-dispatch-${reminder.id}`}
                 onClick={() => { onDispatch(reminder.id); setShowDispatch(false) }}
-              >🚀 Confirm Dispatch</button>
+              >Confirm Dispatch</button>
             </div>
           </div>
         </div>
