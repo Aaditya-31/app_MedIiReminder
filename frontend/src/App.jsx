@@ -4,6 +4,7 @@ import ReviewQueue from './pages/ReviewQueue'
 import Appointments from './pages/Appointments'
 import ToastContainer from './components/ToastContainer'
 import ChatBot from './components/ChatBot'
+import CursorGlow from './components/CursorGlow'
 
 export default function App() {
   const [page, setPage] = useState('queue')
@@ -26,6 +27,7 @@ export default function App() {
       </div>
       <ToastContainer toasts={toasts} />
       <ChatBot />
+      <CursorGlow />
     </div>
   )
 }
